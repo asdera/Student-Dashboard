@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <button id="signinButton">Sign in with Google</button>
+
+        <script>
+            var signinButton = document.getElementById('signinButton');
+            signinButton.addEventListener('click',function()
+            {
+                var provider = new firebase.auth.GoogleAuthProvider();
+                firebase.auth().signInWithPopup(provider);
+            });
+
+
+
+            // Listen for auth state changes
+            firebase.auth().onAuthStateChanged(onAuthStateChanged);
+
+            function onAuthStateChanged(user)
+            {
+                
+                    console.log("State changed");
+                
+            }
+            
+            firebase.auth().getRedirectResult().then(function(result) 
+            {
+                if (result.credential) {
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    var token = result.credential.accessToken;
+                    // ...
+                }
+                // The signed-in user info.
+                var user = result.user;
+                }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+            });
+
+            firebase.auth().onAuthStateChanged(user => {
+            if(user) 
+            {
+                window.location = 'landing.html'; //After successful login, user will be redirected to home.html
+                console.log('Redirecting to landing page');
+            }
+            });
+        </script>
+
+        <script src="" async defer></script>
+
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDowoJFIBswr8aAiSx1tKuhiyownpGPUYI",
+            authDomain: "massyhacks.firebaseapp.com",
+            databaseURL: "https://massyhacks.firebaseio.com",
+            projectId: "massyhacks",
+            storageBucket: "massyhacks.appspot.com",
+            messagingSenderId: "562327116202"
+        };
+        firebase.initializeApp(config);
+        </script>
+    </body>
+</html>
