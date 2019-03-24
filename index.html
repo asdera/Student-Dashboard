@@ -1,303 +1,1098 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="./">
+<head>
+	<title>Contact V4</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-orange.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!--===============================================================================================-->
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+</head>
+<body class = "mdl-color--black">
 
-    <title>Home</title>
+    
+   <header class="header mdl-layout__header mdl-color-text--white mdl-color--black">
+      <style>
+          a {
+              color: white;
+          text-emphasis-color: white;
+          text-decoration-color: white;
+          text-decoration: none;
+        }
+          .right{
+              padding-left: 200px;
+          }
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+      </style>
 
-    <!-- Custom styles for this template -->
-    <link href="styles.css" rel="stylesheet">
-  </head>
-
-  <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file"></span>
-                  Orders
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="shopping-cart"></span>
-                  Products
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  Customers
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="bar-chart-2"></span>
-                  Reports
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  Integrations
-                </a>
-              </li>
-            </ul>
-
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Saved reports</span>
-              <a class="d-flex align-items-center text-muted" href="#">
-                <span data-feather="plus-circle"></span>
-              </a>
-            </h6>
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Current month
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Last quarter
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Social engagement
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Year-end sale
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
-              </div>
-              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-              </button>
+    <!-- Navigation Bar -->
+    <div class="tab mdl-layout__header-row mdl-color--black">
+      <div class="mdl-tab">
+        <div id="allwork" class="mdl-layout__tab is-active mdl-button mdl-js-button mdl-js-ripple-effect">
+        <i class="material-icons">home</i> All Work
+        </div>
+        <div id="math" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">mode_edit</i> Math
+        </div>
+        <div id="physics" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">fingerprint</i> Physics
+        </div>
+        <div id="english" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">book</i> English
+        </div>
+        <div id="chem" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">wb_sunny</i> Chemistry
+        </div>
+        <div class ="right">
+            <div id="add_Note" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+              <i class="material-icons">input</i> Add Note
             </div>
-          </div>
-
-          <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
-
-          <h2>Section title</h2>
-          <div class="table-responsive">
-            <table class="table table-striped table-sm">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </main>
+            <div id="add_Grade" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+              <i class="material-icons">input</i> Add Grade
+            </div>
+        </div>
       </div>
     </div>
+  </header>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../../../dist/js/bootstrap.min.js"></script>
-
-    <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
-
-    <!-- Graphs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-    <script>
-      var ctx = document.getElementById("myChart");
-      var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          datasets: [{
-            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-            lineTension: 0,
-            backgroundColor: 'transparent',
-            borderColor: '#007bff',
-            borderWidth: 4,
-            pointBackgroundColor: '#007bff'
-          }]
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: false
-              }
-            }]
-          },
-          legend: {
-            display: false,
-          }
+    <style>
+        .container-fluid{
+            width= 1200px;
+            background: grey;
+            border-top: 10px;
         }
-      });
-    </script>
-  </body>
+        .row {
+            width: 1200p;
+            margin-right: auto;
+            margin-left: auto;
+
+            background: grey;
+         }
+        .top{
+            color: white;
+            font-family: Poppins-Regular;
+            text-align: center;
+            font-size: 30px;
+            height: 40px;
+            padding: 40px 0;
+        }
+    </style>
+    <div id = "mbacker" class="container-fluid">
+    <div id = "mback" class = "col-sm-12 top">All Notes</div>
+    <hr>
+    <div id = "backer" class="row">
+      <div class="col-sm-6" id = left>
+      </div>
+      <div class="col-sm-6" id = right>  
+      </div>
+    </div>
+    <hr>
+    <div id = "avs" class = "col-sm-12 top">Averages Overall</div>
+    <hr>
+    <canvas id="Allvals" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    <canvas id="ChemChart" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    <canvas id="EngChart" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    <canvas id="MathChart" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    <canvas id="Physchart" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    
+    
+    <script>
+    
+var ctx = document.getElementById("Allvals");
+var mat = [];
+var eng = [];
+var che = [];
+var phy = [];
+var data = {
+    labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
+    datasets: [
+        {
+            label: "English",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(0, 161, 255, 0.4)",
+            borderColor: "rgba(0, 161, 255, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(0, 161, 255, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(0, 161, 255, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [70, 70, 89, 89, 95],
+            
+        },
+        {
+            label: "Math",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 208, 0, 0.4)",
+            borderColor: "rgba(255, 208, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(1255, 208, 0, 0.4)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 208, 0, 0.4)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [80, 100, 60, 70, 80],
+        },
+        {
+            label: "Physics",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 25, 25, 0.4)",
+            borderColor: "rgba(255, 25, 25, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(255, 25, 25, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 25, 25, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [96, 96, 96, 79, 79],
+        },
+        {
+            label: "Chemistry",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(81, 204, 0, 0.4)",
+            borderColor: "rgba(81, 204, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(81, 204, 0, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(81, 204, 0, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [70, 80, 90, 70, 70],
+        }
+        
+    ]
+};
+
+var options = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Semester 1' 
+    },
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    },
+    scales: {
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+				display: true,
+				labelString: 'Tests'
+            }
+    }],
+        yAxes: [{
+            display: true,
+            scaleLabel: {
+                display: true,
+				labelString: 'Percent Grades'
+            }
+        }]
+    }
+};
+    
+
+var Allvals = new Chart(ctx, {
+    type: 'line', 
+    data: data,  
+    options: options
+    
+});
+
+    
+var ctx = document.getElementById("Physchart");
+    
+var data = {
+    labels: [],
+    datasets: [
+        
+        {
+            label: "Physics",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 25, 25, 0.4)",
+            borderColor: "rgba(255, 25, 25, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(255, 25, 25, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 25, 25, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: phy,
+        }
+    ]
+};
+
+var options = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Physics Report' 
+    },
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    },
+    scales: {
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+				display: true,
+				labelString: 'Tests'
+            }
+    }],
+        yAxes: [{
+            display: true,
+            scaleLabel: {
+                display: true,
+				labelString: 'Percent Grades'
+            }
+        }]
+    }
+};
+    
+
+var Physchart = new Chart(ctx, {
+    type: 'line', 
+    data: data,  
+    options: options
+    
+});
+var ctx = document.getElementById("MathChart");
+    
+var data = {
+    labels: [],
+    datasets: [
+        {
+            label: "Math",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 208, 0, 0.4)",
+            borderColor: "rgba(255, 208, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(1255, 208, 0, 0.4)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 208, 0, 0.4)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: mat,
+        }
+    ]
+};
+
+var options = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Math Report' 
+    },
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    },
+    scales: {
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+				display: true,
+				labelString: 'Tests'
+            }
+    }],
+        yAxes: [{
+            display: true,
+            scaleLabel: {
+                display: true,
+				labelString: 'Percent Grades'
+            }
+        }]
+    }
+};
+    
+
+var MathChart = new Chart(ctx, {
+    type: 'line', 
+    data: data,  
+    options: options
+    
+});
+
+
+
+    
+    
+var ctx = document.getElementById("EngChart");
+    
+var data = {
+    labels: [],
+    datasets: [
+        {
+            label: "English",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(0, 161, 255, 0.4)",
+            borderColor: "rgba(0, 161, 255, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(0, 161, 255, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(0, 161, 255, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: eng,
+            
+        }
+    ]
+};
+
+var options = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'English Report' 
+    },
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    },
+    scales: {
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+				display: true,
+				labelString: 'Tests'
+            }
+    }],
+        yAxes: [{
+            display: true,
+            scaleLabel: {
+                display: true,
+				labelString: 'Percent Grades'
+            }
+        }]
+    }
+};
+    
+
+var EngChart = new Chart(ctx, {
+    type: 'line', 
+    data: data,  
+    options: options
+    
+});
+
+
+
+        var ctx = document.getElementById("ChemChart");
+        var data = {
+            labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
+            datasets: [
+
+                {
+                    label: "Chemistry",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(81, 204, 0, 0.4)",
+                    borderColor: "rgba(81, 204, 0, 1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "rgba(81, 204, 0, 1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(81, 204, 0, 1)",
+                    pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: che,
+                }
+            ]
+        };
+        var options = {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Chemistry Report' 
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Tests'
+                    }
+            }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Percent Grades'
+                    }
+                }]
+            }
+        };
+
+
+        var ChemChart = new Chart(ctx, {
+            type: 'line', 
+            data: data,  
+            options: options
+
+        });
+
+
+        </script>
+        
+    <div id = "grades" class = "col-sm-12 top">Grades Overall</div>
+    <hr>
+    <style>
+table {
+  width:100%;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+table#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+ background-color: #fff;
+}
+table#t01 th {
+  background-color: black;
+  color: white;
+}
+</style>
+    <table id="t01">
+  <tr>
+    <th>Test Type</th>
+    <th>Grade</th> 
+    <th>Subject</th>
+  </tr>
+
+</table>
+    <div id = "thing">
+    <hr>
+    <div id = "sec" class = "col-sm-12 top">Post Secondary Options</div>   
+    <hr>
+    <canvas id="overcha" style="display: block; width: 647px; height: 323px; background: white" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    
+     <script>
+     var ctx = document.getElementById("overcha").getContext("2d");
+    
+let artsArray = [86, 75, 75, 80, 80, 84, 70, 77, 78, 80, 75, 70, 78, 65, 75, 73, 65, 70, 70, 73, 72, 70, 70, 70, 70, 70, 70, 70, 70, 72, 70, 70, 65, 67, 65, 65, 65, 60];
+let scienceArray = [91, 86, 85, 85, 84, 84, 83, 82, 80, 80, 80, 78, 78, 78, 75, 75, 75, 75, 73, 72, 72, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 67, 65, 65, 65, 60];
+let commerceArray = [95, 84, 83, 83, 87, 88, 84, 87, 78, 80, 90, 82, 80, 78, 83, 75, 75, 78, 68, 72, 72, 80, 80, 70, 70, 70, 70, 70, 70, 70, 73, 83, 85, 67, 65, 65, 65, 60];  
+let engineeringArray = [92, 85, 89, 86, 90, 87, 85, 84, 83, 88, 80, 85, 76, 78, 85, 80, 75, 75, 69, 88, 72, 80, 80, 70, 70, 70, 70, 71, 74, 73, 74, 85, 70, 75, 65, 65, 75, 68];
+    
+var arts1 = 0, 
+    arts2 = 0, 
+    arts3 = 0, 
+    arts4 = 0, 
+    arts5 = 0, 
+    arts6 = 0, 
+    science1 = 0, 
+    science2 = 0, 
+    science3 = 0, 
+    science4 = 0, 
+    science5 = 0, 
+    science6 = 0,
+    commerce1 = 0, 
+    commerce2 = 0, 
+    commerce3 = 0, 
+    commerce4 = 0, 
+    commerce5 = 0, 
+    commerce6 = 0,
+    engineering1 = 0,
+    engineering2 = 0,
+    engineering3 = 0,
+    engineering4 = 0,
+    engineering5 = 0,
+    engineering6 = 0;
+    
+for (let i = 0; i < artsArray.length; i++) {
+    if (artsArray[i] <= 70) {
+        arts1++;
+    }
+    if (artsArray[i] <= 75) {     
+        arts2++;
+    }
+    if (artsArray[i] <= 80) {       
+        arts3++;
+    }
+    if (artsArray[i] <= 85) {      
+        arts4++;
+    }
+    if (artsArray[i] <= 90) {      
+        arts5++;
+    }
+    if (artsArray[i] <= 95) {       
+        arts6++;
+    }
+}
+        
+for (let i = 0; i < scienceArray.length; i++) {
+    if (scienceArray[i] <= 70) {
+        science1++;
+    }
+    if (scienceArray[i] <= 75) {     
+        science2++;
+    }
+    if (scienceArray[i] <= 80) {       
+        science3++;
+    }
+    if (scienceArray[i] <= 85) {      
+        science4++;
+    }
+    if (scienceArray[i] <= 90) {      
+        science5++;
+    }
+    if (scienceArray[i] <= 95) {       
+        science6++;
+    }
+}
+
+        
+for (let i = 0; i < commerceArray.length; i++) {
+    if (commerceArray[i] <= 70) {
+        commerce1++;
+    }
+    if (commerceArray[i] <= 75) {     
+        commerce2++;
+    }
+    if (commerceArray[i] <= 80) {       
+        commerce3++;
+    }
+    if (commerceArray[i] <= 85) {      
+        commerce4++;
+    }
+    if (commerceArray[i] <= 90) {      
+        commerce5++;
+    }
+    if (commerceArray[i] <= 95) {       
+        commerce6++;
+    }
+}
+
+        
+for (let i = 0; i < engineeringArray.length; i++) {
+    if (engineeringArray[i] <= 70) {
+        engineering1++;
+    }
+    if (engineeringArray[i] <= 75) {     
+        engineering2++;
+    }
+    if (engineeringArray[i] <= 80) {       
+        engineering3++;
+    }
+    if (engineeringArray[i] <= 85) {      
+        engineering4++;
+    }
+    if (engineeringArray[i] <= 90) {      
+        engineering5++;
+    }
+    if (engineeringArray[i] <= 95) {       
+        engineering6++;
+    }
+}
+
+var n = [0,0,38,0,0,0,0]
+var data = {
+    labels: ["70", "75", "80", "85", "90", "95", "100"],
+    datasets: [
+        {
+            label: "Arts",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(0, 161, 255, 0.4)",
+            borderColor: "rgba(0, 161, 255, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(0, 161, 255, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(0, 161, 255, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [arts1, arts2, arts3, arts4, arts5, arts6, arts6],
+            
+        },
+        {
+            label: "Science",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 208, 0, 0.4)",
+            borderColor: "rgba(255, 208, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(1255, 208, 0, 0.4)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 208, 0, 0.4)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [science1, science2, science3, science4, science5, science6, science6],
+        },
+        {
+            label: "Commerce",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 25, 25, 0.4)",
+            borderColor: "rgba(255, 25, 25, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(255, 25, 25, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 25, 25, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [commerce1, commerce2, commerce3, commerce4, commerce5, commerce6, commerce6],
+        },
+        {
+            label: "Engineering",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(81, 204, 0, 0.4)",
+            borderColor: "rgba(81, 204, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointStyle: 'cirle',
+            pointBorderColor: "rgba(81, 204, 0, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(81, 204, 0, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            radius: 50,
+            data: [engineering1, engineering2, engineering3, engineering4, engineering5, engineering6, engineering6],
+        },
+        {
+            label: "Average",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+            borderColor: "rgba(0, 0, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(0, 0, 0, 0.4)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(0, 0, 0, 0.4)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 0.4)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: n,
+            borderDash: [10,5],
+        }
+    ]
+};
+
+var options = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Number of Eligible Universities' 
+    },
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    },
+    scales: {
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+				display: true,
+				labelString: 'Percent Average'
+            }
+    }],
+        yAxes: [{
+            display: true,
+            scaleLabel: {
+                display: true,
+				labelString: 'Number of Universities'
+            }
+        }]
+    }
+};
+    
+    
+var overcha = new Chart(ctx, {
+    type: 'line', 
+    data: data,  
+    options: options
+    
+});
+    
+</script>  
+    <style>
+        p{
+            color: white;
+            font-size: 15px;
+        }
+        </style>
+    
+    <center><p> Your current average is 80%.</p>
+    <p> Elegible Universities: 36 </p>
+    <p> UBC, McMaster, Simon Fraser, Queen's, Alberta, Victoria, Guelph, Waterloo, York, Calgary, Carleton, Mount Royal, Toronto, Ottawa, New Brunswick, Dalhousie, Moncton, Ryerson, Laurentian, Concordia (Montreal), UOIT, Memorial, Acadia, Lakehead, Saint Mary's, St. Francis Xavier, UPEI, Fraser Valley, Windsor, Saskatchewan, Regina, UNBC, Cape Breton, Algoma, MacEwan, Vancouver Island </p></center>
+    </div>
+  </div>
+
+
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+    
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDowoJFIBswr8aAiSx1tKuhiyownpGPUYI",
+    authDomain: "massyhacks.firebaseapp.com",
+    databaseURL: "https://massyhacks.firebaseio.com",
+    projectId: "massyhacks",
+    storageBucket: "massyhacks.appspot.com",
+    messagingSenderId: "562327116202"
+  };
+  firebase.initializeApp(config);
+</script>
+ <script>
+     
+        var database = firebase.database();
+        var ref = database.ref("Assesments");
+        var markref = database.ref("Marks");
+        var n = 0;
+        var things = 0;
+        document.getElementById("ChemChart").style.display = "none";
+        document.getElementById("EngChart").style.display = "none";
+        document.getElementById("MathChart").style.display = "none";
+        document.getElementById("Physchart").style.display = "none";
+        
+        ref.orderByKey().on("child_added", function(snapshot) {
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, null)
+                n++
+        });
+     
+     
+       markref.orderByKey().on("child_added", function(snapshot) {
+           addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), null);
+       });
+        
+                           
+        document.getElementById('math').onclick = function() {
+            cleanup();
+            document.getElementById("mback").innerHTML = "Math Notes";
+            document.getElementById("avs").innerHTML = "Math Average";
+            document.getElementById("grades").innerHTML = "Math Grades";
+            document.getElementById("MathChart").style.display = "inline";
+            ref.orderByKey().on("child_added", function(snapshot) {
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "Math")
+                n++;
+            });
+            markref.orderByKey().on("child_added", function(snapshot) {
+                addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), "Math");
+            });
+        };
+     
+        document.getElementById('chem').onclick = function() {
+            cleanup();
+            document.getElementById("mback").innerHTML = "Chemistry Notes";
+            document.getElementById("avs").innerHTML = "Chemistry Average";
+            document.getElementById("grades").innerHTML = "Chemistry Grades";
+            document.getElementById("ChemChart").style.display = "inline";
+            ref.orderByKey().on("child_added", function(snapshot) {
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "Chemistry")
+                n++;
+            });
+            markref.orderByKey().on("child_added", function(snapshot) {
+                addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), "Chemistry");
+            });
+        };
+     
+        document.getElementById('english').onclick = function() {
+            cleanup();
+            document.getElementById("mback").innerHTML = "English Notes";
+            document.getElementById("avs").innerHTML = "English Average";
+            document.getElementById("grades").innerHTML = "English Grades";
+            document.getElementById("EngChart").style.display = "inline";
+            ref.orderByKey().on("child_added", function(snapshot) {
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "English")
+                n++;
+            });
+            markref.orderByKey().on("child_added", function(snapshot) {
+                addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), "English");
+            });
+        };
+     
+        document.getElementById('physics').onclick = function() {
+            cleanup();
+            document.getElementById("mback").innerHTML = "Physics Notes";
+            document.getElementById("avs").innerHTML = "Physics Average";
+            document.getElementById("grades").innerHTML = "Physics Grades";
+            document.getElementById("Physchart").style.display = "inline";
+            ref.orderByKey().on("child_added", function(snapshot) {
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "Physics")
+                n++;
+            });
+            markref.orderByKey().on("child_added", function(snapshot) {
+                addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), "Physics");
+            });
+        };
+     
+         document.getElementById('add_Note').onclick = function() {
+                window.location = '../y/write.html';
+        };
+        
+        document.getElementById('add_Grade').onclick = function() {
+                window.location = '../y/grades.html';
+        };
+     
+        document.getElementById('allwork').onclick = function() {
+            cleanup();
+            document.getElementById("mback").innerHTML = "All Notes";
+            document.getElementById("avs").innerHTML = "Overall Average";
+            document.getElementById("grades").innerHTML = "Grades Overall";
+            document.getElementById("Allvals").style.display = "inline";
+            document.getElementById("thing").style.display = "inline";
+            ref.orderByKey().on("child_added", function(snapshot) {
+                n++;
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, null)
+            });
+            markref.orderByKey().on("child_added", function(snapshot) {
+                addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), null);
+            });
+        };
+        function addtableentry(type, mark, subject, n){
+            var newish = document.createElement('tr');
+            newish.innerHTML = '<td>' + type + '</td>'+
+                               '<td>' +mark + '</td>'+
+                               '<td>'+ subject + '</td>'
+            if (n == subject || n == null){
+                if (n == "Math"){
+                    addData(MathChart, type, mark);
+                }else if (n == "Physics"){
+                    addData(Physchart, type, mark);
+                }else if (n == "English"){
+                    addData(EngChart, type, mark);
+                }else{
+                    addData(ChemChart, type, mark);
+                }
+                document.getElementById("t01").appendChild(newish);
+            }
+                
+        }
+        function empty (chart){
+            while (chart.data.labels.length != 0){
+                chart.data.labels.pop();
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.pop();
+                });
+            }
+            chart.update();
+        }
+        function addData(chart, label, data) {
+            
+            chart.data.labels.push(label);
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.push(data);
+            });
+            chart.update();
+        }
+        function createPostElement(title, message, subject, date, type, n, limit){
+            var html =
+                    '<div class = "pls>' +
+                        '<div class="col-sm-4 pls">' +
+                          '<div class="card blue-grey darken-1">' +
+                            '<div class="card-content white-text">' +
+                              '<span class="card-title">' + title +'</span>'+
+                              '<h6>' + message + '</h6>'+
+                              '<hr>' +
+                              '<h6> Descripton: ' + subject + ' ' + type + '</h6>'+
+                              '<h6> Due: ' + date + '</p>'+
+                            '</div>'+
+                          '</div>'+
+                        '</div>' +
+                      '</div>'
+            
+            var newish = document.createElement('div');
+            
+            newish.innerHTML = html;
+            if (subject == limit || limit == null){
+                if (n%2 == 0){
+                    document.getElementById("left").appendChild(newish);
+                } else{
+                    document.getElementById("right").appendChild(newish);
+                }
+            }else {
+                lowern();
+            } 
+        }
+        function cleanup(){
+            n = 0;
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+            document.getElementById("ChemChart").style.display = "none";
+            empty(ChemChart);
+            document.getElementById("EngChart").style.display = "none";
+            empty(EngChart);
+            document.getElementById("MathChart").style.display = "none";
+            empty(MathChart);
+            document.getElementById("Physchart").style.display = "none";
+            empty(Physchart)
+            document.getElementById("Allvals").style.display = "none";
+            empty(Allvals);
+            document.getElementById("thing").style.display = "none";
+            mat = [];
+            eng = [];
+            phy = [];
+            che = [];
+            document.getElementById("t01").innerHTML = '<tr>'+
+                                                    '<th>Test Type</th>'+
+                                                    '<th>Grade</th>'+
+                                                    '<th>Subject</th>'+
+                                                    '</tr>'
+        }
+        function lowern(){
+            n = n-1;
+        }
+        
+        
+</script>
+
+</body>
 </html>

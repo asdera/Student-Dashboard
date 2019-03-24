@@ -8,11 +8,11 @@
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    
 	<link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-orange.min.css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-orange.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <!--===============================================================================================-->
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
@@ -110,7 +110,10 @@
     <script>
     
 var ctx = document.getElementById("Allvals");
-    
+var mat = [];
+var eng = [];
+var che = [];
+var phy = [];
 var data = {
     labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
     datasets: [
@@ -133,7 +136,7 @@ var data = {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [83, 89, 76, 88, 90],
+            data: [70, 70, 89, 89, 95],
             
         },
         {
@@ -155,7 +158,7 @@ var data = {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [90, 88, 92, 100, 95],
+            data: [80, 100, 60, 70, 80],
         },
         {
             label: "Physics",
@@ -176,7 +179,7 @@ var data = {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [76, 84, 92, 89, 97],
+            data: [96, 96, 96, 79, 79],
         },
         {
             label: "Chemistry",
@@ -197,30 +200,9 @@ var data = {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [85, 77, 83, 87, 91],
-        },
-        {
-            label: "Average",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(0, 0, 0, 0.4)",
-            borderColor: "rgba(0, 0, 0, 1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(0, 0, 0, 0.4)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(0, 0, 0, 0.4)",
-            pointHoverBorderColor: "rgba(220, 220, 220, 0.4)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [83.5, 84.3, 85.1, 88.1, 89.3],
-            borderDash: [10,5],
+            data: [70, 80, 90, 70, 70],
         }
+        
     ]
 };
 
@@ -264,14 +246,11 @@ var Allvals = new Chart(ctx, {
     
 });
 
-
-</script>
-    <script>
     
 var ctx = document.getElementById("Physchart");
     
 var data = {
-    labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
+    labels: [],
     datasets: [
         
         {
@@ -293,7 +272,7 @@ var data = {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [76, 84, 92, 89, 97],
+            data: phy,
         }
     ]
 };
@@ -337,13 +316,10 @@ var Physchart = new Chart(ctx, {
     options: options
     
 });
-        </script>
-    <script>
-    
 var ctx = document.getElementById("MathChart");
     
 var data = {
-    labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
+    labels: [],
     datasets: [
         {
             label: "Math",
@@ -364,7 +340,7 @@ var data = {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [90, 88, 92, 100, 95],
+            data: mat,
         }
     ]
 };
@@ -410,13 +386,13 @@ var MathChart = new Chart(ctx, {
 });
 
 
-</script>
-    <script>
+
+    
     
 var ctx = document.getElementById("EngChart");
     
 var data = {
-    labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
+    labels: [],
     datasets: [
         {
             label: "English",
@@ -437,7 +413,7 @@ var data = {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [83, 89, 76, 88, 90],
+            data: eng,
             
         }
     ]
@@ -484,8 +460,7 @@ var EngChart = new Chart(ctx, {
 });
 
 
-</script>
-    <script>
+
         var ctx = document.getElementById("ChemChart");
         var data = {
             labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
@@ -510,7 +485,7 @@ var EngChart = new Chart(ctx, {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: [85, 77, 83, 87, 91],
+                    data: che,
                 }
             ]
         };
@@ -590,29 +565,302 @@ table#t01 th {
   </tr>
 
 </table>
+    <div id = "thing">
+    <hr>
+    <div id = "sec" class = "col-sm-12 top">Post Secondary Options</div>   
+    <hr>
+    <canvas id="overcha" style="display: block; width: 647px; height: 323px; background: white" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    
+     <script>
+     var ctx = document.getElementById("overcha").getContext("2d");
+    
+let artsArray = [86, 75, 75, 80, 80, 84, 70, 77, 78, 80, 75, 70, 78, 65, 75, 73, 65, 70, 70, 73, 72, 70, 70, 70, 70, 70, 70, 70, 70, 72, 70, 70, 65, 67, 65, 65, 65, 60];
+let scienceArray = [91, 86, 85, 85, 84, 84, 83, 82, 80, 80, 80, 78, 78, 78, 75, 75, 75, 75, 73, 72, 72, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 67, 65, 65, 65, 60];
+let commerceArray = [95, 84, 83, 83, 87, 88, 84, 87, 78, 80, 90, 82, 80, 78, 83, 75, 75, 78, 68, 72, 72, 80, 80, 70, 70, 70, 70, 70, 70, 70, 73, 83, 85, 67, 65, 65, 65, 60];  
+let engineeringArray = [92, 85, 89, 86, 90, 87, 85, 84, 83, 88, 80, 85, 76, 78, 85, 80, 75, 75, 69, 88, 72, 80, 80, 70, 70, 70, 70, 71, 74, 73, 74, 85, 70, 75, 65, 65, 75, 68];
+    
+var arts1 = 0, 
+    arts2 = 0, 
+    arts3 = 0, 
+    arts4 = 0, 
+    arts5 = 0, 
+    arts6 = 0, 
+    science1 = 0, 
+    science2 = 0, 
+    science3 = 0, 
+    science4 = 0, 
+    science5 = 0, 
+    science6 = 0,
+    commerce1 = 0, 
+    commerce2 = 0, 
+    commerce3 = 0, 
+    commerce4 = 0, 
+    commerce5 = 0, 
+    commerce6 = 0,
+    engineering1 = 0,
+    engineering2 = 0,
+    engineering3 = 0,
+    engineering4 = 0,
+    engineering5 = 0,
+    engineering6 = 0;
+    
+for (let i = 0; i < artsArray.length; i++) {
+    if (artsArray[i] <= 70) {
+        arts1++;
+    }
+    if (artsArray[i] <= 75) {     
+        arts2++;
+    }
+    if (artsArray[i] <= 80) {       
+        arts3++;
+    }
+    if (artsArray[i] <= 85) {      
+        arts4++;
+    }
+    if (artsArray[i] <= 90) {      
+        arts5++;
+    }
+    if (artsArray[i] <= 95) {       
+        arts6++;
+    }
+}
+        
+for (let i = 0; i < scienceArray.length; i++) {
+    if (scienceArray[i] <= 70) {
+        science1++;
+    }
+    if (scienceArray[i] <= 75) {     
+        science2++;
+    }
+    if (scienceArray[i] <= 80) {       
+        science3++;
+    }
+    if (scienceArray[i] <= 85) {      
+        science4++;
+    }
+    if (scienceArray[i] <= 90) {      
+        science5++;
+    }
+    if (scienceArray[i] <= 95) {       
+        science6++;
+    }
+}
+
+        
+for (let i = 0; i < commerceArray.length; i++) {
+    if (commerceArray[i] <= 70) {
+        commerce1++;
+    }
+    if (commerceArray[i] <= 75) {     
+        commerce2++;
+    }
+    if (commerceArray[i] <= 80) {       
+        commerce3++;
+    }
+    if (commerceArray[i] <= 85) {      
+        commerce4++;
+    }
+    if (commerceArray[i] <= 90) {      
+        commerce5++;
+    }
+    if (commerceArray[i] <= 95) {       
+        commerce6++;
+    }
+}
+
+        
+for (let i = 0; i < engineeringArray.length; i++) {
+    if (engineeringArray[i] <= 70) {
+        engineering1++;
+    }
+    if (engineeringArray[i] <= 75) {     
+        engineering2++;
+    }
+    if (engineeringArray[i] <= 80) {       
+        engineering3++;
+    }
+    if (engineeringArray[i] <= 85) {      
+        engineering4++;
+    }
+    if (engineeringArray[i] <= 90) {      
+        engineering5++;
+    }
+    if (engineeringArray[i] <= 95) {       
+        engineering6++;
+    }
+}
+
+var n = [0,0,38,0,0,0,0]
+var data = {
+    labels: ["70", "75", "80", "85", "90", "95", "100"],
+    datasets: [
+        {
+            label: "Arts",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(0, 161, 255, 0.4)",
+            borderColor: "rgba(0, 161, 255, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(0, 161, 255, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(0, 161, 255, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [arts1, arts2, arts3, arts4, arts5, arts6, arts6],
+            
+        },
+        {
+            label: "Science",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 208, 0, 0.4)",
+            borderColor: "rgba(255, 208, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(1255, 208, 0, 0.4)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 208, 0, 0.4)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [science1, science2, science3, science4, science5, science6, science6],
+        },
+        {
+            label: "Commerce",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 25, 25, 0.4)",
+            borderColor: "rgba(255, 25, 25, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(255, 25, 25, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 25, 25, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [commerce1, commerce2, commerce3, commerce4, commerce5, commerce6, commerce6],
+        },
+        {
+            label: "Engineering",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(81, 204, 0, 0.4)",
+            borderColor: "rgba(81, 204, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointStyle: 'cirle',
+            pointBorderColor: "rgba(81, 204, 0, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(81, 204, 0, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            radius: 50,
+            data: [engineering1, engineering2, engineering3, engineering4, engineering5, engineering6, engineering6],
+        },
+        {
+            label: "Average",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+            borderColor: "rgba(0, 0, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(0, 0, 0, 0.4)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(0, 0, 0, 0.4)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 0.4)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: n,
+            borderDash: [10,5],
+        }
+    ]
+};
+
+var options = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Number of Eligible Universities' 
+    },
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    },
+    scales: {
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+				display: true,
+				labelString: 'Percent Average'
+            }
+    }],
+        yAxes: [{
+            display: true,
+            scaleLabel: {
+                display: true,
+				labelString: 'Number of Universities'
+            }
+        }]
+    }
+};
+    
+    
+var overcha = new Chart(ctx, {
+    type: 'line', 
+    data: data,  
+    options: options
+    
+});
+    
+</script>  
+    <style>
+        p{
+            color: white;
+            font-size: 15px;
+        }
+        </style>
+    
+    <center><p> Your current average is 80%.</p>
+    <p> Elegible Universities: 36 </p>
+    <p> UBC, McMaster, Simon Fraser, Queen's, Alberta, Victoria, Guelph, Waterloo, York, Calgary, Carleton, Mount Royal, Toronto, Ottawa, New Brunswick, Dalhousie, Moncton, Ryerson, Laurentian, Concordia (Montreal), UOIT, Memorial, Acadia, Lakehead, Saint Mary's, St. Francis Xavier, UPEI, Fraser Valley, Windsor, Saskatchewan, Regina, UNBC, Cape Breton, Algoma, MacEwan, Vancouver Island </p></center>
+    </div>
   </div>
 
-<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-	<script>
-		$(".selection-2").select2({
-			minimumResultsForSearch: 20,
-			dropdownParent: $('#dropDownSelect1')
-		});
-	</script>
-<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
+
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
@@ -638,15 +886,17 @@ table#t01 th {
   firebase.initializeApp(config);
 </script>
  <script>
+     
         var database = firebase.database();
         var ref = database.ref("Assesments");
         var markref = database.ref("Marks");
         var n = 0;
+        var things = 0;
         document.getElementById("ChemChart").style.display = "none";
         document.getElementById("EngChart").style.display = "none";
         document.getElementById("MathChart").style.display = "none";
         document.getElementById("Physchart").style.display = "none";
-     
+        
         ref.orderByKey().on("child_added", function(snapshot) {
                 createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
                 snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, null)
@@ -657,6 +907,7 @@ table#t01 th {
        markref.orderByKey().on("child_added", function(snapshot) {
            addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), null);
        });
+        
                            
         document.getElementById('math').onclick = function() {
             cleanup();
@@ -723,11 +974,11 @@ table#t01 th {
         };
      
          document.getElementById('add_Note').onclick = function() {
-                window.location = '../y/write.html';
+                window.location = '../write.html';
         };
         
         document.getElementById('add_Grade').onclick = function() {
-                window.location = '../y/grades.html';
+                window.location = '../grades.html';
         };
      
         document.getElementById('allwork').onclick = function() {
@@ -736,6 +987,7 @@ table#t01 th {
             document.getElementById("avs").innerHTML = "Overall Average";
             document.getElementById("grades").innerHTML = "Grades Overall";
             document.getElementById("Allvals").style.display = "inline";
+            document.getElementById("thing").style.display = "inline";
             ref.orderByKey().on("child_added", function(snapshot) {
                 n++;
                 createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
@@ -751,9 +1003,35 @@ table#t01 th {
                                '<td>' +mark + '</td>'+
                                '<td>'+ subject + '</td>'
             if (n == subject || n == null){
+                if (n == "Math"){
+                    addData(MathChart, type, mark);
+                }else if (n == "Physics"){
+                    addData(Physchart, type, mark);
+                }else if (n == "English"){
+                    addData(EngChart, type, mark);
+                }else{
+                    addData(ChemChart, type, mark);
+                }
                 document.getElementById("t01").appendChild(newish);
             }
                 
+        }
+        function empty (chart){
+            while (chart.data.labels.length != 0){
+                chart.data.labels.pop();
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.pop();
+                });
+            }
+            chart.update();
+        }
+        function addData(chart, label, data) {
+            
+            chart.data.labels.push(label);
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.push(data);
+            });
+            chart.update();
         }
         function createPostElement(title, message, subject, date, type, n, limit){
             var html =
@@ -789,10 +1067,19 @@ table#t01 th {
             document.getElementById("left").innerHTML = "";
             document.getElementById("right").innerHTML = "";
             document.getElementById("ChemChart").style.display = "none";
+            empty(ChemChart);
             document.getElementById("EngChart").style.display = "none";
+            empty(EngChart);
             document.getElementById("MathChart").style.display = "none";
+            empty(MathChart);
             document.getElementById("Physchart").style.display = "none";
+            empty(Physchart)
             document.getElementById("Allvals").style.display = "none";
+            document.getElementById("thing").style.display = "none";
+            mat = [];
+            eng = [];
+            phy = [];
+            che = [];
             document.getElementById("t01").innerHTML = '<tr>'+
                                                     '<th>Test Type</th>'+
                                                     '<th>Grade</th>'+
@@ -802,6 +1089,7 @@ table#t01 th {
         function lowern(){
             n = n-1;
         }
+        
         
 </script>
 
