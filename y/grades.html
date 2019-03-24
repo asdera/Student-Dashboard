@@ -93,11 +93,12 @@
         
         var database = firebase.database();
         
-        var keys = firebase.database().ref().child('Assesments').push().key;
+        var keys = firebase.database().ref().child('Marks').push().key;
         
-        firebase.database().ref('Marks/' + Subject).set({
+        firebase.database().ref('Marks/' + keys).set({
             mark: Mark,
             type: Type,
+            subject: Subject,
 
         });
         alert("Event Added!")

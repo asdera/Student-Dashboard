@@ -98,7 +98,7 @@
       </div>
     </div>
     <hr>
-    <div class = "col-sm-12 top">Averages Overall</div>
+    <div id = "avs" class = "col-sm-12 top">Averages Overall</div>
     <hr>
     <canvas id="Allvals" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
     <canvas id="ChemChart" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
@@ -557,7 +557,7 @@ var EngChart = new Chart(ctx, {
 
         </script>
         
-    <div class = "col-sm-12 top">Grades Overall</div>
+    <div id = "grades" class = "col-sm-12 top">Grades Overall</div>
     <hr>
     <style>
 table {
@@ -586,23 +586,9 @@ table#t01 th {
   <tr>
     <th>Test Type</th>
     <th>Grade</th> 
-    <th>Age</th>
+    <th>Subject</th>
   </tr>
-  <tr>
-    <td>Grade</td>
-    <td>Smith</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>80</td>
-  </tr>
+
 </table>
   </div>
 
@@ -660,68 +646,115 @@ table#t01 th {
         document.getElementById("EngChart").style.display = "none";
         document.getElementById("MathChart").style.display = "none";
         document.getElementById("Physchart").style.display = "none";
+     
         ref.orderByKey().on("child_added", function(snapshot) {
                 createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
                 snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, null)
                 n++
         });
+     
+     
        markref.orderByKey().on("child_added", function(snapshot) {
-           console.log(snapshot.val());
+           addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), null);
        });
                            
         document.getElementById('math').onclick = function() {
             cleanup();
+            document.getElementById("mback").innerHTML = "Math Notes";
+            document.getElementById("avs").innerHTML = "Math Average";
+            document.getElementById("grades").innerHTML = "Math Grades";
             document.getElementById("MathChart").style.display = "inline";
             ref.orderByKey().on("child_added", function(snapshot) {
                 createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
                 snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "Math")
                 n++;
-        });
+            });
+            markref.orderByKey().on("child_added", function(snapshot) {
+                addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), "Math");
+            });
         };
      
         document.getElementById('chem').onclick = function() {
             cleanup();
+            document.getElementById("mback").innerHTML = "Chemistry Notes";
+            document.getElementById("avs").innerHTML = "Chemistry Average";
+            document.getElementById("grades").innerHTML = "Chemistry Grades";
             document.getElementById("ChemChart").style.display = "inline";
             ref.orderByKey().on("child_added", function(snapshot) {
                 createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
                 snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "Chemistry")
                 n++;
-        });
+            });
+            markref.orderByKey().on("child_added", function(snapshot) {
+                addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), "Chemistry");
+            });
         };
      
         document.getElementById('english').onclick = function() {
             cleanup();
+            document.getElementById("mback").innerHTML = "English Notes";
+            document.getElementById("avs").innerHTML = "English Average";
+            document.getElementById("grades").innerHTML = "English Grades";
             document.getElementById("EngChart").style.display = "inline";
             ref.orderByKey().on("child_added", function(snapshot) {
                 createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
                 snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "English")
                 n++;
-        });
+            });
+            markref.orderByKey().on("child_added", function(snapshot) {
+                addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), "English");
+            });
         };
      
         document.getElementById('physics').onclick = function() {
             cleanup();
+            document.getElementById("mback").innerHTML = "Physics Notes";
+            document.getElementById("avs").innerHTML = "Physics Average";
+            document.getElementById("grades").innerHTML = "Physics Grades";
             document.getElementById("Physchart").style.display = "inline";
             ref.orderByKey().on("child_added", function(snapshot) {
                 createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
                 snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "Physics")
                 n++;
-        });
+            });
+            markref.orderByKey().on("child_added", function(snapshot) {
+                addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), "Physics");
+            });
         };
      
          document.getElementById('add_Note').onclick = function() {
                 window.location = '../y/write.html';
-            
-            };
+        };
+        
+        document.getElementById('add_Grade').onclick = function() {
+                window.location = '../y/grades.html';
+        };
+     
         document.getElementById('allwork').onclick = function() {
             cleanup();
+            document.getElementById("mback").innerHTML = "All Notes";
+            document.getElementById("avs").innerHTML = "Overall Average";
+            document.getElementById("grades").innerHTML = "Grades Overall";
             document.getElementById("Allvals").style.display = "inline";
             ref.orderByKey().on("child_added", function(snapshot) {
                 n++;
                 createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
                 snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, null)
-        });
+            });
+            markref.orderByKey().on("child_added", function(snapshot) {
+                addtableentry(snapshot.child("type").val(),snapshot.child("mark").val(), snapshot.child("subject").val(), null);
+            });
         };
+        function addtableentry(type, mark, subject, n){
+            var newish = document.createElement('tr');
+            newish.innerHTML = '<td>' + type + '</td>'+
+                               '<td>' +mark + '</td>'+
+                               '<td>'+ subject + '</td>'
+            if (n == subject || n == null){
+                document.getElementById("t01").appendChild(newish);
+            }
+                
+        }
         function createPostElement(title, message, subject, date, type, n, limit){
             var html =
                     '<div class = "pls>' +
@@ -760,6 +793,11 @@ table#t01 th {
             document.getElementById("MathChart").style.display = "none";
             document.getElementById("Physchart").style.display = "none";
             document.getElementById("Allvals").style.display = "none";
+            document.getElementById("t01").innerHTML = '<tr>'+
+                                                    '<th>Test Type</th>'+
+                                                    '<th>Grade</th>'+
+                                                    '<th>Subject</th>'+
+                                                    '</tr>'
         }
         function lowern(){
             n = n-1;
