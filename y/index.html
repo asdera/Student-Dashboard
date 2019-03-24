@@ -1,0 +1,771 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Contact V4</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-orange.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!--===============================================================================================-->
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+</head>
+<body class = "mdl-color--black">
+
+    
+   <header class="header mdl-layout__header mdl-color-text--white mdl-color--black">
+      <style>
+          a {
+              color: white;
+          text-emphasis-color: white;
+          text-decoration-color: white;
+          text-decoration: none;
+        }
+          .right{
+              padding-left: 200px;
+          }
+
+      </style>
+
+    <!-- Navigation Bar -->
+    <div class="tab mdl-layout__header-row mdl-color--black">
+      <div class="mdl-tab">
+        <div id="allwork" class="mdl-layout__tab is-active mdl-button mdl-js-button mdl-js-ripple-effect">
+        <i class="material-icons">home</i> All Work
+        </div>
+        <div id="math" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">mode_edit</i> Math
+        </div>
+        <div id="physics" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">fingerprint</i> Physics
+        </div>
+        <div id="english" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">book</i> English
+        </div>
+        <div id="chem" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">wb_sunny</i> Chemistry
+        </div>
+        <div class ="right">
+            <div id="add_Note" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+              <i class="material-icons">input</i> Add Note
+            </div>
+            <div id="add_Grade" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">
+              <i class="material-icons">input</i> Add Grade
+            </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <style>
+        .container-fluid{
+            width= 1200px;
+            background: grey;
+            border-top: 10px;
+        }
+        .row {
+            width: 1200p;
+            margin-right: auto;
+            margin-left: auto;
+
+            background: grey;
+         }
+        .top{
+            color: white;
+            font-family: Poppins-Regular;
+            text-align: center;
+            font-size: 30px;
+            height: 40px;
+            padding: 40px 0;
+        }
+    </style>
+    <div id = "mbacker" class="container-fluid">
+    <div id = "mback" class = "col-sm-12 top">All Notes</div>
+    <hr>
+    <div id = "backer" class="row">
+      <div class="col-sm-6" id = left>
+      </div>
+      <div class="col-sm-6" id = right>  
+      </div>
+    </div>
+    <hr>
+    <div class = "col-sm-12 top">Averages Overall</div>
+    <hr>
+    <canvas id="Allvals" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    <canvas id="ChemChart" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    <canvas id="EngChart" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    <canvas id="MathChart" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    <canvas id="Physchart" style="display: block; width: 647px; height: 323px; background:white;" width="647" height="323" class="chartjs-render-monitor"></canvas>
+    
+    
+    <script>
+    
+var ctx = document.getElementById("Allvals");
+    
+var data = {
+    labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
+    datasets: [
+        {
+            label: "English",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(0, 161, 255, 0.4)",
+            borderColor: "rgba(0, 161, 255, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(0, 161, 255, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(0, 161, 255, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [83, 89, 76, 88, 90],
+            
+        },
+        {
+            label: "Math",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 208, 0, 0.4)",
+            borderColor: "rgba(255, 208, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(1255, 208, 0, 0.4)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 208, 0, 0.4)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [90, 88, 92, 100, 95],
+        },
+        {
+            label: "Physics",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 25, 25, 0.4)",
+            borderColor: "rgba(255, 25, 25, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(255, 25, 25, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 25, 25, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [76, 84, 92, 89, 97],
+        },
+        {
+            label: "Chemistry",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(81, 204, 0, 0.4)",
+            borderColor: "rgba(81, 204, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(81, 204, 0, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(81, 204, 0, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [85, 77, 83, 87, 91],
+        },
+        {
+            label: "Average",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+            borderColor: "rgba(0, 0, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(0, 0, 0, 0.4)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(0, 0, 0, 0.4)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 0.4)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [83.5, 84.3, 85.1, 88.1, 89.3],
+            borderDash: [10,5],
+        }
+    ]
+};
+
+var options = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Semester 1' 
+    },
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    },
+    scales: {
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+				display: true,
+				labelString: 'Tests'
+            }
+    }],
+        yAxes: [{
+            display: true,
+            scaleLabel: {
+                display: true,
+				labelString: 'Percent Grades'
+            }
+        }]
+    }
+};
+    
+
+var Allvals = new Chart(ctx, {
+    type: 'line', 
+    data: data,  
+    options: options
+    
+});
+
+
+</script>
+    <script>
+    
+var ctx = document.getElementById("Physchart");
+    
+var data = {
+    labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
+    datasets: [
+        
+        {
+            label: "Physics",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 25, 25, 0.4)",
+            borderColor: "rgba(255, 25, 25, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(255, 25, 25, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 25, 25, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [76, 84, 92, 89, 97],
+        }
+    ]
+};
+
+var options = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Physics Report' 
+    },
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    },
+    scales: {
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+				display: true,
+				labelString: 'Tests'
+            }
+    }],
+        yAxes: [{
+            display: true,
+            scaleLabel: {
+                display: true,
+				labelString: 'Percent Grades'
+            }
+        }]
+    }
+};
+    
+
+var Physchart = new Chart(ctx, {
+    type: 'line', 
+    data: data,  
+    options: options
+    
+});
+        </script>
+    <script>
+    
+var ctx = document.getElementById("MathChart");
+    
+var data = {
+    labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
+    datasets: [
+        {
+            label: "Math",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 208, 0, 0.4)",
+            borderColor: "rgba(255, 208, 0, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(1255, 208, 0, 0.4)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(255, 208, 0, 0.4)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [90, 88, 92, 100, 95],
+        }
+    ]
+};
+
+var options = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Math Report' 
+    },
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    },
+    scales: {
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+				display: true,
+				labelString: 'Tests'
+            }
+    }],
+        yAxes: [{
+            display: true,
+            scaleLabel: {
+                display: true,
+				labelString: 'Percent Grades'
+            }
+        }]
+    }
+};
+    
+
+var MathChart = new Chart(ctx, {
+    type: 'line', 
+    data: data,  
+    options: options
+    
+});
+
+
+</script>
+    <script>
+    
+var ctx = document.getElementById("EngChart");
+    
+var data = {
+    labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
+    datasets: [
+        {
+            label: "English",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(0, 161, 255, 0.4)",
+            borderColor: "rgba(0, 161, 255, 1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(0, 161, 255, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(0, 161, 255, 1)",
+            pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [83, 89, 76, 88, 90],
+            
+        }
+    ]
+};
+
+var options = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'English Report' 
+    },
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    },
+    scales: {
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+				display: true,
+				labelString: 'Tests'
+            }
+    }],
+        yAxes: [{
+            display: true,
+            scaleLabel: {
+                display: true,
+				labelString: 'Percent Grades'
+            }
+        }]
+    }
+};
+    
+
+var EngChart = new Chart(ctx, {
+    type: 'line', 
+    data: data,  
+    options: options
+    
+});
+
+
+</script>
+    <script>
+        var ctx = document.getElementById("ChemChart");
+        var data = {
+            labels: ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5"],
+            datasets: [
+
+                {
+                    label: "Chemistry",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(81, 204, 0, 0.4)",
+                    borderColor: "rgba(81, 204, 0, 1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "rgba(81, 204, 0, 1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(81, 204, 0, 1)",
+                    pointHoverBorderColor: "rgba(220, 220, 220, 1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: [85, 77, 83, 87, 91],
+                }
+            ]
+        };
+        var options = {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Chemistry Report' 
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Tests'
+                    }
+            }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Percent Grades'
+                    }
+                }]
+            }
+        };
+
+
+        var ChemChart = new Chart(ctx, {
+            type: 'line', 
+            data: data,  
+            options: options
+
+        });
+
+
+        </script>
+        
+    <div class = "col-sm-12 top">Grades Overall</div>
+    <hr>
+    <style>
+table {
+  width:100%;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+table#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+ background-color: #fff;
+}
+table#t01 th {
+  background-color: black;
+  color: white;
+}
+</style>
+    <table id="t01">
+  <tr>
+    <th>Test Type</th>
+    <th>Grade</th> 
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>Grade</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>80</td>
+  </tr>
+</table>
+  </div>
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<script>
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+    
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDowoJFIBswr8aAiSx1tKuhiyownpGPUYI",
+    authDomain: "massyhacks.firebaseapp.com",
+    databaseURL: "https://massyhacks.firebaseio.com",
+    projectId: "massyhacks",
+    storageBucket: "massyhacks.appspot.com",
+    messagingSenderId: "562327116202"
+  };
+  firebase.initializeApp(config);
+</script>
+ <script>
+        var database = firebase.database();
+        var ref = database.ref("Assesments");
+        var markref = database.ref("Marks");
+        var n = 0;
+        document.getElementById("ChemChart").style.display = "none";
+        document.getElementById("EngChart").style.display = "none";
+        document.getElementById("MathChart").style.display = "none";
+        document.getElementById("Physchart").style.display = "none";
+        ref.orderByKey().on("child_added", function(snapshot) {
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, null)
+                n++
+        });
+       markref.orderByKey().on("child_added", function(snapshot) {
+           console.log(snapshot.val());
+       });
+                           
+        document.getElementById('math').onclick = function() {
+            cleanup();
+            document.getElementById("MathChart").style.display = "inline";
+            ref.orderByKey().on("child_added", function(snapshot) {
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "Math")
+                n++;
+        });
+        };
+     
+        document.getElementById('chem').onclick = function() {
+            cleanup();
+            document.getElementById("ChemChart").style.display = "inline";
+            ref.orderByKey().on("child_added", function(snapshot) {
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "Chemistry")
+                n++;
+        });
+        };
+     
+        document.getElementById('english').onclick = function() {
+            cleanup();
+            document.getElementById("EngChart").style.display = "inline";
+            ref.orderByKey().on("child_added", function(snapshot) {
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "English")
+                n++;
+        });
+        };
+     
+        document.getElementById('physics').onclick = function() {
+            cleanup();
+            document.getElementById("Physchart").style.display = "inline";
+            ref.orderByKey().on("child_added", function(snapshot) {
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, "Physics")
+                n++;
+        });
+        };
+     
+         document.getElementById('add_Note').onclick = function() {
+                window.location = '../y/write.html';
+            
+            };
+        document.getElementById('allwork').onclick = function() {
+            cleanup();
+            document.getElementById("Allvals").style.display = "inline";
+            ref.orderByKey().on("child_added", function(snapshot) {
+                n++;
+                createPostElement(snapshot.child("title").val(), snapshot.child("message").val(), 
+                snapshot.child("subject").val(), snapshot.child("date").val(),snapshot.child("type").val(), n, null)
+        });
+        };
+        function createPostElement(title, message, subject, date, type, n, limit){
+            var html =
+                    '<div class = "pls>' +
+                        '<div class="col-sm-4 pls">' +
+                          '<div class="card blue-grey darken-1">' +
+                            '<div class="card-content white-text">' +
+                              '<span class="card-title">' + title +'</span>'+
+                              '<h6>' + message + '</h6>'+
+                              '<hr>' +
+                              '<h6> Descripton: ' + subject + ' ' + type + '</h6>'+
+                              '<h6> Due: ' + date + '</p>'+
+                            '</div>'+
+                          '</div>'+
+                        '</div>' +
+                      '</div>'
+            
+            var newish = document.createElement('div');
+            
+            newish.innerHTML = html;
+            if (subject == limit || limit == null){
+                if (n%2 == 0){
+                    document.getElementById("left").appendChild(newish);
+                } else{
+                    document.getElementById("right").appendChild(newish);
+                }
+            }else {
+                lowern();
+            } 
+        }
+        function cleanup(){
+            n = 0;
+            document.getElementById("left").innerHTML = "";
+            document.getElementById("right").innerHTML = "";
+            document.getElementById("ChemChart").style.display = "none";
+            document.getElementById("EngChart").style.display = "none";
+            document.getElementById("MathChart").style.display = "none";
+            document.getElementById("Physchart").style.display = "none";
+            document.getElementById("Allvals").style.display = "none";
+        }
+        function lowern(){
+            n = n-1;
+        }
+        
+</script>
+
+</body>
+</html>
