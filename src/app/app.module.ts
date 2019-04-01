@@ -18,6 +18,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { OverviewComponent } from './overview/overview.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 
 @NgModule({
@@ -35,7 +36,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFireStorageModule, AppRoutingModule // imports firebase/storage only needed for storage features
+    AngularFireStorageModule,
+    AngularFireDatabaseModule, 
+    AppRoutingModule // imports firebase/storage only needed for storage features
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
